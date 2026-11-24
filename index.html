@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cookie.MC | Survival Server</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Vazirmatn',Arial,sans-serif;
+    color:#fff;
+    background:#050807;
+    overflow-x:hidden;
+}
+
+/* ================= BACKGROUND ================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    background:
+        linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.82)),
+        radial-gradient(circle at 50% 0%,#20a84b33,transparent 35%),
+        radial-gradient(circle at 100% 50%,#ff8a0030,transparent 30%),
+        #050807;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:#20ff7040;
+    filter:blur(140px);
+    top:-250px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:-2;
+    animation:glow 5s infinite alternate;
+}
+
+@keyframes glow{
+    from{opacity:.4;transform:translateX(-50%) scale(1)}
+    to{opacity:.8;transform:translateX(-50%) scale(1.2)}
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    padding:16px 25px;
+    background:rgba(5,8,7,.72);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:900;
+    font-size:22px;
+}
+
+.brand-icon{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,#ffb347,#ff6500);
+    box-shadow:0 0 25px #ff8c0055;
+    font-size:25px;
+}
+
+.nav a{
+    color:#aaa;
+    text-decoration:none;
+    margin-right:25px;
+    transition:.2s;
+}
+
+.nav a:hover{
+    color:#ffad45;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    max-width:1100px;
+    min-height:650px;
+    margin:auto;
+    padding:80px 20px 60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.badge{
+    padding:9px 18px;
+    border-radius:50px;
+    border:1px solid #39ff7950;
+    background:#39ff7912;
+    color:#62ff91;
+    font-size:14px;
+    box-shadow:0 0 25px #39ff7115;
+    margin-bottom:25px;
+}
+
+.logo{
+    width:145px;
+    height:145px;
+    border-radius:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:88px;
+    background:
+        linear-gradient(145deg,#ffc15c,#ff6500);
+    box-shadow:
+        0 0 40px #ff850066,
+        inset 0 0 30px #ffffff20;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0) rotate(0);
+    }
+    50%{
+        transform:translateY(-15px) rotate(4deg);
+    }
+}
+
+.hero h1{
+    margin-top:35px;
+    font-size:clamp(42px,7vw,78px);
+    font-weight:900;
+    line-height:1.1;
+    text-shadow:0 0 35px #ff8c0055;
+}
+
+.hero h1 span{
+    color:#ff9d32;
+}
+
+.hero p{
+    margin-top:20px;
+    max-width:650px;
+    color:#a9aaa9;
+    font-size:18px;
+    line-height:2;
+}
+
+/* ================= BUTTONS ================= */
+
+.buttons{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.btn{
+    border:0;
+    cursor:pointer;
+    text-decoration:none;
+    color:white;
+    padding:15px 28px;
+    border-radius:14px;
+    font-family:inherit;
+    font-weight:800;
+    font-size:16px;
+    transition:.25s;
+}
+
+.btn-main{
+    background:linear-gradient(135deg,#ffb347,#ff6500);
+    box-shadow:0 10px 35px #ff720044;
+}
+
+.btn-main:hover{
+    transform:translateY(-4px) scale(1.03);
+    box-shadow:0 15px 45px #ff720066;
+}
+
+.btn-dark{
+    background:#ffffff0d;
+    border:1px solid #ffffff18;
+}
+
+.btn-dark:hover{
+    background:#ffffff15;
+    transform:translateY(-3px);
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+    max-width:1050px;
+    margin:auto;
+    padding:30px 20px 70px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.section-title h2{
+    font-size:32px;
+    font-weight:900;
+}
+
+.section-title span{
+    color:#ff9d32;
+}
+
+.section-title p{
+    color:#777;
+    margin-top:8px;
+}
+
+/* ================= SERVER CARD ================= */
+
+.server-card{
+    padding:35px;
+    border-radius:28px;
+    background:
+        linear-gradient(145deg,#151916dd,#090b0add);
+    border:1px solid #ff9d3240;
+    box-shadow:
+        0 20px 70px #00000070,
+        0 0 40px #ff8c0010;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.server-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,#ff9d32,transparent);
+}
+
+.server-card h2{
+    color:#ffb45c;
+    font-size:28px;
+}
+
+.server-card .desc{
+    color:#888;
+    margin-top:8px;
+}
+
+.ip-box{
+    max-width:650px;
+    margin:25px auto 15px;
+    padding:20px;
+    background:#020302;
+    border:1px solid #ffffff12;
+    border-radius:16px;
+    direction:ltr;
+    font-family:monospace;
+    font-size:20px;
+    color:#ffb45c;
+    box-shadow:inset 0 0 30px #ff8c0008;
+}
+
+.copy-btn{
+    border:0;
+    padding:14px 28px;
+    border-radius:13px;
+    cursor:pointer;
+    background:#ff8c00;
+    color:white;
+    font-weight:800;
+    font-family:inherit;
+    font-size:16px;
+    transition:.2s;
+}
+
+.copy-btn:hover{
+    transform:scale(1.04);
+    background:#ffa52f;
+}
+
+.status{
+    margin-top:20px;
+    color:#777;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.online-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#39ff72;
+    box-shadow:0 0 15px #39ff72;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        opacity:.35;
+        transform:scale(.7);
+    }
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.stat{
+    padding:22px;
+    text-align:center;
+    background:#101310;
+    border:1px solid #ffffff0b;
+    border-radius:18px;
+}
+
+.stat-icon{
+    font-size:30px;
+}
+
+.stat strong{
+    display:block;
+    color:#ffad45;
+    font-size:23px;
+    margin-top:8px;
+}
+
+.stat span{
+    color:#666;
+    font-size:13px;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.feature{
+    padding:28px 20px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#121612,#0a0c0a);
+    border:1px solid #ffffff0c;
+    transition:.25s;
+    text-align:center;
+}
+
+.feature:hover{
+    transform:translateY(-7px);
+    border-color:#ff9d3245;
+    box-shadow:0 15px 40px #ff8c0012;
+}
+
+.feature-icon{
+    font-size:45px;
+    margin-bottom:14px;
+}
+
+.feature h3{
+    color:#ffb45c;
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:#777;
+    line-height:1.8;
+}
+
+/* ================= SURVIVAL ================= */
+
+.survival{
+    margin-top:25px;
+    padding:35px;
+    border-radius:25px;
+    background:
+        linear-gradient(135deg,#102016,#0a0d0b);
+    border:1px solid #39ff7220;
+}
+
+.survival h2{
+    color:#62ff91;
+    margin-bottom:18px;
+}
+
+.survival-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.survival-item{
+    padding:15px;
+    background:#ffffff05;
+    border-radius:13px;
+    color:#aaa;
+}
+
+.survival-item b{
+    color:#fff;
+}
+
+/* ================= RULES ================= */
+
+.rules{
+    margin-top:25px;
+    padding:30px;
+    border-radius:24px;
+    background:#0e100e;
+    border:1px solid #ffffff0b;
+}
+
+.rules h2{
+    color:#ff9d32;
+    margin-bottom:18px;
+}
+
+.rules p{
+    color:#888;
+    line-height:2;
+    margin:7px 0;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    text-align:center;
+    padding:35px 20px;
+    border-top:1px solid #ffffff08;
+    color:#555;
+}
+
+footer b{
+    color:#ff9d32;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translate(-50%,120px);
+    background:#151915;
+    border:1px solid #39ff7140;
+    color:#fff;
+    padding:14px 22px;
+    border-radius:14px;
+    box-shadow:0 15px 40px #00000070;
+    transition:.35s;
+    z-index:999;
+}
+
+.toast.show{
+    transform:translate(-50%,0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .navbar{
+        padding:12px 15px;
+    }
+
+    .nav a{
+        display:none;
+    }
+
+    .hero{
+        min-height:600px;
+        padding:55px 15px;
+    }
+
+    .logo{
+        width:110px;
+        height:110px;
+        font-size:65px;
+        border-radius:28px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .server-card{
+        padding:25px 15px;
+    }
+
+    .ip-box{
+        font-size:16px;
+        overflow:auto;
+    }
+
+    .stats,
+    .features,
+    .survival-list{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:25px 15px 55px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+    <div class="nav">
+
+        <div class="brand">
+            <div class="brand-icon">🍪</div>
+            Cookie.MC
+        </div>
+
+        <div>
+            <a href="#server">سرور</a>
+            <a href="#features">ویژگی‌ها</a>
+            <a href="#rules">قوانین</a>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="badge">
+        🟢 SURVIVAL SERVER
+    </div>
+
+    <div class="logo">
+        🍪
+    </div>
+
+    <h1>
+        COOKIE.<span>MC</span>
+    </h1>
+
+    <p>
+        وارد دنیای Survival شو، منابع جمع کن،
+        خونه بساز، با دوستات بازی کن و ماجراجویی خودت رو شروع کن! 🌍⛏️
+    </p>
+
+    <div class="buttons">
+
+        <a href="#server" class="btn btn-main">
+            🎮 ورود به سرور
+        </a>
+
+        <a href="#features" class="btn btn-dark">
+            ✨ امکانات سرور
+        </a>
+
+    </div>
+
+</section>
+
+
+<div class="container">
+
+    <!-- SERVER -->
+
+    <section id="server">
+
+        <div class="section-title">
+            <h2>ورود به <span>Cookie.MC</span></h2>
+            <p>ماجراجویی Survival از همین‌جا شروع میشه!</p>
+        </div>
+
+        <div class="server-card">
+
+            <h2>🎮 آدرس سرور</h2>
+
+            <p class="desc">
+                IP سرور را کپی کن و وارد Minecraft شو.
+            </p>
+
+            <div class="ip-box" id="serverIP">
+                IP-SERVER-HERE
+            </div>
+
+            <button class="copy-btn" onclick="copyIP()">
+                📋 کپی IP
+            </button>
+
+            <div class="status">
+                <span class="online-dot"></span>
+                وضعیت سرور: آماده بازی
+            </div>
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-icon">🌍</div>
+                <strong>Survival</strong>
+                <span>گیم مود اصلی</span>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">⛏️</div>
+                <strong>24/7</strong>
+                <span>دنیای همیشه آماده</span>
+            </div>
+
+            <div class="stat">
+                <div class="stat-icon">👥</div>
+                <strong>Multiplayer</strong>
+                <span>بازی با دوستان</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section id="features" style="margin-top:70px">
+
+        <div class="section-title">
+            <h2>🔥 امکانات <span>Survival</span></h2>
+            <p>همه‌چیز برای یک Survival خفن</p>
+        </div>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="feature-icon">⛏️</div>
+                <h3>Mining</h3>
+                <p>
+                    معدن‌کاری کن، منابع پیدا کن
+                    و وسایل مورد نیازت رو بساز.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🏠</div>
+                <h3>Build</h3>
+                <p>
+                    خونه و سازه‌های خودت رو بساز
+                    و دنیای خودت رو شکل بده.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🌲</div>
+                <h3>Adventure</h3>
+                <p>
+                    جهان رو بگرد، منابع جمع کن
+                    و ماجراجویی‌های جدید پیدا کن.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SURVIVAL -->
+
+    <section class="survival">
+
+        <h2>🌍 دنیای Survival</h2>
+
+        <div class="survival-list">
+
+            <div class="survival-item">
+                🪓 <b>Gather</b> — منابع جمع کن
+            </div>
+
+            <div class="survival-item">
+                🏠 <b>Build</b> — پایگاه خودت رو بساز
+            </div>
+
+            <div class="survival-item">
+                ⚔️ <b>Explore</b> — جهان رو کشف کن
+            </div>
+
+            <div class="survival-item">
+                👥 <b>Play Together</b> — با دوستانت بازی کن
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RULES -->
+
+    <section class="rules" id="rules">
+
+        <h2>📜 قوانین Cookie.MC</h2>
+
+        <p>1️⃣ احترام به بازیکنان دیگر الزامی است.</p>
+        <p>2️⃣ استفاده از تقلب و هک ممنوع است.</p>
+        <p>3️⃣ خرابکاری در ساخت‌وساز دیگران ممنوع است.</p>
+        <p>4️⃣ برای داشتن یک Survival خوب با بقیه همکاری کن. 🤝</p>
+
+    </section>
+
+</div>
+
+
+<footer>
+    🍪 <b>Cookie.MC</b> © 2026
+    <br>
+    Survival • Adventure • Community
+</footer>
+
+
+<div class="toast" id="toast">
+    ✅ IP سرور کپی شد!
+</div>
+
+
+<script>
+
+function copyIP(){
+
+    const ip =
+        document.getElementById("serverIP")
+        .innerText
+        .trim();
+
+    navigator.clipboard.writeText(ip)
+        .then(() => {
+
+            const toast =
+                document.getElementById("toast");
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            },2200);
+
+        })
+        .catch(() => {
+
+            alert("کپی کردن IP انجام نشد!");
+
+        });
+
+}
+
+</script>
+
+</body>
+</html>
